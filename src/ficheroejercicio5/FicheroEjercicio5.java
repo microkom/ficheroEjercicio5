@@ -21,48 +21,49 @@ public class FicheroEjercicio5 {
     public static void main(String[] args) {
         String fileName1 = "archivo_1.txt";
         String fileName2 = "archivo_2.txt";
-        String fileName3 = "archivo_3.txt";
 
-        File file1 = null;
-        File file2 = null;
-        File file3 = null;
+        File file1 = new File(fileName1);
+        File file2 = new File(fileName2);
 
-        FileReader fr = null;
-        BufferedReader bufferRead = null;
-
-        FileWriter file = null;
-        //BufferedWriter bufferWrote = null;
+        String fileName3 = removeExt(file1.getName()) + "_" + removeExt(file2.getName()) + ".txt";
+        //System.out.println(fileName3);
         
-        leerArchivoEscribirLectura(fileName1,fileName3);
+        readFileThenWriteIt(file1, fileName3);
+        readFileThenWriteIt(file2, fileName3);
     }
-    public static void leerArchivoEscribirLectura(String nombreOrigen, String nombreDestino){
-        File file1 = null;
+
+    public static void readFileThenWriteIt(File fileRead, String nombreDestino) {
+        //This method reads from one file and then writes its
+        //content into another one without wiping its original content
         
+        //necesario para crear un objeto del mismo tipo
         FileReader fr = null;
         BufferedReader bufferRead = null;
-        
-        FileWriter file = null;
+
+        File fileWritten = null;
+        FileWriter fileToWrite = null;
+        BufferedWriter bufferWillWrite = null;
         try {
-            
-            //lectura de un archivo
-            file1 = new File(nombreOrigen);
-            fr = new FileReader(file1);
+
+            //creacion de estructura de lectura de un archivo
+            fr = new FileReader(fileRead);
             bufferRead = new BufferedReader(fr);
-            
-            
-            file = new FileWriter("archivo_3.txt",true);
-            //bufferWrote = new BufferedWriter(file);
+
+            //creacion de estructura de escritura
+            fileWritten = new File(nombreDestino);
+            fileToWrite = new FileWriter(fileWritten, true); //true: permite agregar info sin borrar el archivo
+            bufferWillWrite = new BufferedWriter(fileToWrite);
             try {
                 String line;
                 while ((line = bufferRead.readLine()) != null) {
-                    file.write(line);
+                    bufferWillWrite.write(line);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
                 try {
-                    if (file != null) {
-                        file.close();
+                    if (fileToWrite != null) {
+                        bufferWillWrite.close();
                     }
                 } catch (Exception er) {
                     System.out.println(er.getMessage());
@@ -79,6 +80,10 @@ public class FicheroEjercicio5 {
                 System.out.println(er.getMessage());
             }
         }
+    }
+
+    public static String removeExt(String fileName) {
+        return (fileName.substring(0, fileName.length() - (fileName.length() - fileName.lastIndexOf('.'))));
     }
 
 }
