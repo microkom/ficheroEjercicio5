@@ -22,10 +22,11 @@ public class FicheroEjercicio5 {
         String fileName1 = "archivo_1.txt";
         String fileName2 = "archivo_2.txt";
 
+        //type File class is for specifying the location/name of the file
         File file1 = new File(fileName1);
         File file2 = new File(fileName2);
 
-        String fileName3 = removeExt(file1.getName()) + "_" + removeExt(file2.getName()) + ".txt";
+        String fileName3 = removeFileExtension(file1.getName()) + "_" + removeFileExtension(file2.getName()) + ".txt";
         //System.out.println(fileName3);
         
         readFileThenWriteIt(file1, fileName3);
@@ -82,7 +83,7 @@ public class FicheroEjercicio5 {
         }
     }
 
-    public static String removeExt(String fileName) {
+    public static String removeFileExtension(String fileName) {
         return (fileName.substring(0, fileName.length() - (fileName.length() - fileName.lastIndexOf('.'))));
     }
 
