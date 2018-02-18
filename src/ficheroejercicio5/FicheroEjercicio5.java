@@ -32,7 +32,7 @@ public class FicheroEjercicio5 {
         readFileThenWriteIt(file2, fileName3);
     }
 
-    public static void readFileThenWriteIt(File fileRead, String nombreDestino) {
+    public static void readFileThenWriteIt(File fileRead, String destinationFile) {
         //This method reads from one file and then writes its
         //content into another one without wiping its original content
         
@@ -50,7 +50,7 @@ public class FicheroEjercicio5 {
             bufferRead = new BufferedReader(fr);
 
             //creacion de estructura de escritura
-            fileWritten = new File(nombreDestino);
+            fileWritten = new File(destinationFile);
             fileToWrite = new FileWriter(fileWritten, true); //true: permite agregar info sin borrar el archivo
             bufferWillWrite = new BufferedWriter(fileToWrite);
             try {
